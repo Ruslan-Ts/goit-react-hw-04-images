@@ -2,12 +2,6 @@ import { useEffect } from 'react';
 import { Overlay, ModalBox } from './Modal.styled';
 
 const Modal = ({ onClose, largeImageURL, tags }) => {
-  const onCloseModal = e => {
-    if (e.code === 'Escape') {
-      onClose();
-    }
-  };
-
   const onHandleClick = e => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -15,14 +9,14 @@ const Modal = ({ onClose, largeImageURL, tags }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', onCloseModal);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      window.removeEventListener('keydown', onCloseModal);
+    const onCloseModal = e => {
+      if (e.code === 'Escape') {
+        onClose();
+      }
     };
-  }, []);
+    window.addEventListener('keydown', onCloseModal);
+    return window.removeEventListener('keydown', onCloseModal);
+  });
 
   return (
     <Overlay onClick={onHandleClick}>

@@ -15,7 +15,7 @@ const App = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
-  const [largeImageURL, setLargeImageURL] = useState(null);
+  const [largeImageURL] = useState(null);
   const [tagsForModal, setTagsForModal] = useState('');
 
   useEffect(() => {
