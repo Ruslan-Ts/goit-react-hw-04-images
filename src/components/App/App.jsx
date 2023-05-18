@@ -19,6 +19,9 @@ const App = () => {
   const [tagsForModal, setTagsForModal] = useState('');
 
   useEffect(() => {
+    if (!value) {
+      return;
+    }
     setIsLoading(true);
     try {
       const getGalleryImg = async () => {
