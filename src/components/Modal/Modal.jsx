@@ -15,7 +15,7 @@ const Modal = ({ onClose, largeImageURL, tags }) => {
       }
     };
     window.addEventListener('keydown', onCloseModal);
-    return window.removeEventListener('keydown', onCloseModal);
+    return () => window.removeEventListener('keydown', onCloseModal);
   });
 
   return (

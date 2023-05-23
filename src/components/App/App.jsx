@@ -15,7 +15,7 @@ const App = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
-  const [largeImageURL] = useState(null);
+  const [largeImageURL, setLargeImageURL] = useState(null);
   const [tagsForModal, setTagsForModal] = useState('');
 
   useEffect(() => {
@@ -27,13 +27,16 @@ const App = () => {
       const getGalleryImg = async () => {
         const {
           data: { hits, totalHits },
-        } = await getImages(value, page);
+        } = await getImages({ value: value, page: page });
 
         if (!hits.length) {
           return Notiflix.Notify.failure('Nothing');
         }
         setImages(prevHits => [...prevHits, ...getNormalizedImg(hits)]);
         setIsVisibleBtn(page < Math.ceil(totalHits / 12));
+        console.log(hits);
+        console.log(totalHits);
+        console.log(page < Math.ceil(totalHits / 12));
       };
       getGalleryImg();
     } catch (error) {
@@ -56,11 +59,13 @@ const App = () => {
     setValue(newValue.trim());
     setImages([]);
     setPage(1);
+    console.log(newValue);
   };
 
   const handlerOnClickImg = ({ tags, largeImageURL }) => {
     setIsOpenModal(true);
-    setTagsForModal(tags, largeImageURL);
+    setTagsForModal(tags);
+    setLargeImageURL(largeImageURL);
   };
 
   const onClose = () => {

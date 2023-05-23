@@ -23,7 +23,7 @@ const Searchbar = ({ onSubmit }) => {
   };
 
   const handleNameChange = event => {
-    setValue(event.target.value.toLowerCase());
+    setValue(event.currentTarget.value.toLowerCase());
   };
 
   return (
